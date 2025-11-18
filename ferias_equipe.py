@@ -12,7 +12,7 @@ from google.oauth2.service_account import Credentials
 st.set_page_config(page_title="Férias da Equipe", layout="wide")
 st.title("🌴 Controle de Férias da Equipe")
 
-SHEET_ID = "SHEET_ID"
+SHEET_ID = st.secrets["SHEET_ID"].strip()
 
 scope = [
     'https://spreadsheets.google.com/feeds',
@@ -20,8 +20,6 @@ scope = [
 ]
 creds_json = st.secrets["GSPREAD_CREDENTIALS"]
 creds_dict = json.loads(creds_json)
-st.write("📧 Service account email:", creds_dict["client_email"])
-
 creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
 
 client = gspread.authorize(creds)
