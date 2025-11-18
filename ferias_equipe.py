@@ -20,6 +20,8 @@ scope = [
 ]
 creds_json = st.secrets["GSPREAD_CREDENTIALS"]
 creds_dict = json.loads(creds_json)
+st.write("📧 Service account email:", creds_dict["client_email"])
+
 creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
 
 client = gspread.authorize(creds)
